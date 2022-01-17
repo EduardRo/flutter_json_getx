@@ -30,6 +30,9 @@ dependencies:
   flutter:
     sdk: flutter
     
+
+
+    
   get: ^4.3.8
   intl: ^0.17.0
 
@@ -40,6 +43,7 @@ dependencies:
   flutter_secure_storage: ^5.0.2
   http: ^0.13.4
   flutter_staggered_grid_view: ^0.4.0
+  drop_shadow_image: ^0.9.1
 
 dev_dependencies:
   flutter_test:
@@ -62,6 +66,19 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/fonts/
+
+
+  fonts:
+    - family: Raleway
+      fonts:
+        - asset: assets\fonts/Raleway-Regular.ttf
+        - asset: assets\fonts/Raleway-Italic.ttf
+    - family: RubikBeastly
+      fonts:
+        - asset: assets\fonts/RubikBeastly-Regular.ttf
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:

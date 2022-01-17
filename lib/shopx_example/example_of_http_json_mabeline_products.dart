@@ -17,7 +17,7 @@ Future<List<Album>> fetchAlbum() async {
       Album album = Album.fromJson(oneAlbum);
       albums.add(album);
     }
-    print(albums.map((e) => e.price));
+    //print(albums.map((e) => e.price));
 
     return albums;
   } else {
@@ -91,17 +91,20 @@ class _MyAppState extends State<MyApp> {
                           const Divider(
                             height: 1.0,
                             thickness: 2,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                           Card(
-                            color: Colors.blueAccent,
+                            color: Colors.blue,
                             shape: RoundedRectangleBorder(
                               side: const BorderSide(
                                   color: Colors.blue, width: 0),
                               borderRadius: BorderRadius.circular(2),
                             ),
                             child: ListTile(
-                              title: Text(resData?[index].name ?? ""),
+                              title: Text(
+                                resData?[index].name ?? "",
+                                style: const TextStyle(fontFamily: 'Raleway'),
+                              ),
                               subtitle: Text(resData?[index].price ?? ""),
                               leading: CircleAvatar(
                                 backgroundImage: NetworkImage(
@@ -112,51 +115,57 @@ class _MyAppState extends State<MyApp> {
                               ),
                             ),
                           ),
-                          ButtonBar(
-                            children: [
-                              TextButton(
-                                child: const Text(
-                                  'Clasa a XI-a',
-                                  style: TextStyle(color: Colors.white),
+                          Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: ButtonBar(
+                              children: [
+                                TextButton(
+                                  child: const Text(
+                                    'Clasa a XI-a',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w100),
+                                  ),
+                                  onPressed: () {/* ... */},
                                 ),
-                                onPressed: () {/* ... */},
-                              ),
-                              TextButton(
-                                child: const Text(
-                                  'Nivel:',
-                                  style: TextStyle(color: Colors.white),
+                                TextButton(
+                                  child: const Text(
+                                    'Nivel:',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  onPressed: () {/* ... */},
                                 ),
-                                onPressed: () {/* ... */},
-                              ),
-                              const Icon(
-                                Icons.star,
-                                color: Colors.white,
-                                size: 14.0,
-                                semanticLabel:
-                                    'Text to announce in accessibility modes',
-                              ),
-                              const Icon(
-                                Icons.star,
-                                color: Colors.white,
-                                size: 14.0,
-                                semanticLabel:
-                                    'Text to announce in accessibility modes',
-                              ),
-                              const Icon(
-                                Icons.star,
-                                color: Colors.yellow,
-                                size: 14.0,
-                                semanticLabel:
-                                    'Text to announce in accessibility modes',
-                              ),
-                              const Icon(
-                                Icons.star,
-                                color: Colors.yellow,
-                                size: 14.0,
-                                semanticLabel:
-                                    'Text to announce in accessibility modes',
-                              ),
-                            ],
+                                const Icon(
+                                  Icons.star,
+                                  color: Colors.white,
+                                  size: 14.0,
+                                  semanticLabel:
+                                      'Text to announce in accessibility modes',
+                                ),
+                                const Icon(
+                                  Icons.star,
+                                  color: Colors.white,
+                                  size: 14.0,
+                                  semanticLabel:
+                                      'Text to announce in accessibility modes',
+                                ),
+                                const Icon(
+                                  Icons.star,
+                                  color: Colors.red,
+                                  size: 14.0,
+                                  semanticLabel:
+                                      'Text to announce in accessibility modes',
+                                ),
+                                const Icon(
+                                  Icons.star,
+                                  color: Colors.red,
+                                  size: 14.0,
+                                  semanticLabel:
+                                      'Text to announce in accessibility modes',
+                                ),
+                              ],
+                            ),
                           )
                         ],
                       );
