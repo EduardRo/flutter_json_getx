@@ -1,16 +1,19 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'dart:async';
 import 'package:get/get.dart';
-//import 'package:get/instance_manager.dart';
-import 'package:getx_app/shopx_example/controllers/product_controller.dart';
-//import 'package:getx_app/shopx_example/models/product.dart';
-//import 'package:getx_app/shopx_example/models/product.dart';
-import 'package:getx_app/shopx_example/views/product_tile.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
+import 'package:getx_app/getx_http_json_mate_mato/views/test_view.dart';
+import 'package:getx_app/getx_http_json_mate_mato/controllers/controller.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-class HomePage extends StatelessWidget {
-  final ProductController productController = Get.put(ProductController());
+void main() {
+  return runApp(MyApp());
+}
 
-  HomePage({Key? key}) : super(key: key);
+class MyApp extends StatelessWidget {
+  final AlbumController productController = Get.put(AlbumController());
+
+  MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,12 +61,13 @@ class HomePage extends StatelessWidget {
               } else {
                 return StaggeredGridView.countBuilder(
                   crossAxisCount: 2,
-                  itemCount: productController.productList.length,
+                  itemCount: productController.albumList.length,
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
                   itemBuilder: (context, index) {
-                    return Tile(
-                      productController.productList[index],
+                    return ProductTile(
+                      productController.albumList[index],
+                      product: productController.albumList[index],
                     );
                   },
                   staggeredTileBuilder: (index) => const StaggeredTile.fit(1),

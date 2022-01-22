@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 Future<List<Album>> fetchAlbum() async {
   final response = await http.get(Uri.parse(
-      'http://localhost/mate-mato/api/teste-cls-idtest.php?codserie=M09AL05'));
+      'http://127.0.0.1/mate-mato/api/teste-cls-idtest.php?codserie=M09AL05'));
   //print(response.body);
 
   if (response.statusCode == 200) {
@@ -16,7 +16,7 @@ Future<List<Album>> fetchAlbum() async {
       Album album = Album.fromJson(oneAlbum);
       albums.add(album);
     }
-    print(albums.map((e) => e.idtest));
+    //print(albums.map((e) => e.idtest));
 
     return albums;
   } else {
@@ -89,7 +89,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late Future<Album> futureAlbum;
-
+  int counter = 0;
   @override
   void initState() {
     super.initState();
@@ -114,106 +114,118 @@ class _MyAppState extends State<MyApp> {
                 return Container(
                   color: Colors.black45,
                   child: ListView.builder(
-                    itemCount: resData != null ? resData.length : 0,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(1.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Card(
-                              //borderOnForeground: false,
-                              color: Colors.white,
-                              shadowColor: Colors.black,
-                              elevation: 15.0,
-                              child: Padding(
-                                padding: const EdgeInsets.all(18.0),
-                                child: Image.network(
-                                  resData?[index].enuntUrl ?? "",
-                                  height: 150,
-                                  fit: BoxFit.scaleDown,
-                                ),
-                              ),
-                            ),
-                            Card(
-                              color: Colors.blue,
-                              shadowColor: Colors.black,
-                              elevation: 15.0,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: InkWell(
-                                  onTap: () {
-                                    print(resData?[index].var1);
-                                  },
+                      itemCount: resData != null ? resData.length : 0,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(1.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              if (index == counter)
+                                Card(
+                                  //borderOnForeground: false,
+                                  color: Colors.white,
+                                  shadowColor: Colors.black,
+                                  elevation: 15.0,
                                   child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(18.0),
                                     child: Image.network(
-                                      resData?[index].v1Url ?? "",
-                                      height: 100,
+                                      resData?[index].enuntUrl ?? "",
+                                      height: 150,
                                       fit: BoxFit.scaleDown,
                                     ),
                                   ),
                                 ),
-                              ),
-                            ),
-                            Card(
-                              color: Colors.blue,
-                              shadowColor: Colors.black,
-                              elevation: 10.0,
-                              child: Column(
-                                children: [
-                                  Text(index.toString()),
-                                  Padding(
+                              if (index == counter)
+                                // primul button
+                                Card(
+                                  color: Colors.blue,
+                                  shadowColor: Colors.black,
+                                  elevation: 15.0,
+                                  child: Column(
+                                    children: [
+                                      if (index == counter)
+                                        Text('$index - $counter')
+                                      else
+                                        Text(
+                                            'asta-i nu este bun - $index - $counter'),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              counter = counter + 1;
+                                            });
+                                            print(resData?[index].var1);
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Image.network(
+                                              resData?[index].v1Url ?? "",
+                                              height: 100,
+                                              fit: BoxFit.scaleDown,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              if (index == counter)
+                                Card(
+                                  color: Colors.blue,
+                                  shadowColor: Colors.black,
+                                  elevation: 10.0,
+                                  child: Column(
+                                    children: [
+                                      Text(index.toString()),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: InkWell(
+                                          onTap: () {
+                                            print(resData?[index].var2);
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Image.network(
+                                              resData?[index].v2Url ?? "",
+                                              height: 100,
+                                              fit: BoxFit.scaleDown,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              if (index == counter)
+                                Card(
+                                  color: Colors.blue,
+                                  shadowColor: Colors.black,
+                                  elevation: 10.0,
+                                  child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: InkWell(
                                       onTap: () {
-                                        print(resData?[index].var2);
+                                        print(resData?[index].raspuns);
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Image.network(
-                                          resData?[index].v2Url ?? "",
+                                          resData?[index].raspunsUrl ?? "",
                                           height: 100,
                                           fit: BoxFit.scaleDown,
                                         ),
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),
-                            ),
-                            Card(
-                              color: Colors.blue,
-                              shadowColor: Colors.black,
-                              elevation: 10.0,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: InkWell(
-                                  onTap: () {
-                                    print(resData?[index].raspuns);
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Image.network(
-                                      resData?[index].raspunsUrl ?? "",
-                                      height: 100,
-                                      fit: BoxFit.scaleDown,
-                                    ),
-                                  ),
                                 ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
+                            ],
+                          ),
+                        );
+                      }),
                 );
-              }
-
-              // if (snapshot.hasData) {
-              //   return Text(snapshot.data!.title);
-              else if (snapshot.hasError) {
+              } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');
               }
 
