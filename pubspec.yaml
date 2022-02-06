@@ -44,6 +44,8 @@ dependencies:
   http: ^0.13.4
   flutter_staggered_grid_view: ^0.4.0
   drop_shadow_image: ^0.9.1
+  get_storage: ^2.0.3
+  get_state_manager: ^3.13.0
 
 dev_dependencies:
   flutter_test:
