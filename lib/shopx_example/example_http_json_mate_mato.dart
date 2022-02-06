@@ -6,18 +6,21 @@ import 'package:http/http.dart' as http;
 Future<List<Album>> fetchAlbum() async {
   final response = await http.get(Uri.parse(
       'http://127.0.0.1/mate-mato/api/teste-cls-idtest.php?codserie=M09AL05'));
-  //print(response.body);
+  print(response.body);
 
   if (response.statusCode == 200) {
     List<Album> albums = [];
     List<dynamic> albumsJson = jsonDecode(response.body);
-
+    print(
+        '---------------------------------------------------------------------------------------------');
+    print(albumsJson);
     for (var oneAlbum in albumsJson) {
       Album album = Album.fromJson(oneAlbum);
       albums.add(album);
     }
     //print(albums.map((e) => e.idtest));
-
+    print('------------------------------------');
+    print(albums);
     return albums;
   } else {
     throw Exception('Failed to load album!');
@@ -90,9 +93,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   late Future<Album> futureAlbum;
   int counter = 0;
+  String variabila = 'init';
   @override
   void initState() {
     super.initState();
+    //variabila = 'a';
   }
 
   @override
@@ -110,6 +115,7 @@ class _MyAppState extends State<MyApp> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 List<Album>? resData = snapshot.data;
+                print(snapshot.data![2].v1Url);
 
                 return Container(
                   color: Colors.black45,
@@ -145,18 +151,20 @@ class _MyAppState extends State<MyApp> {
                                   child: Column(
                                     children: [
                                       if (index == counter)
-                                        Text('$index - $counter')
+                                        Text('$index - $counter - $variabila')
                                       else
                                         Text(
-                                            'asta-i nu este bun - $index - $counter'),
+                                            'asta-i nu este bun - $index - $counter - $variabila'),
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: InkWell(
                                           onTap: () {
                                             setState(() {
                                               counter = counter + 1;
+                                              variabila = 'b';
                                             });
                                             print(resData?[index].var1);
+                                            print(variabila);
                                           },
                                           child: Padding(
                                             padding: const EdgeInsets.all(8.0),

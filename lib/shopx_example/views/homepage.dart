@@ -12,6 +12,8 @@ class HomePage extends StatelessWidget {
 
   HomePage({Key? key}) : super(key: key);
 
+  get productList => null;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,8 +64,9 @@ class HomePage extends StatelessWidget {
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
                   itemBuilder: (context, index) {
-                    return Tile(
+                    return ProductTile(
                       productController.productList[index],
+                      product: productList[index],
                     );
                   },
                   staggeredTileBuilder: (index) => const StaggeredTile.fit(1),
